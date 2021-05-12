@@ -16,22 +16,19 @@ module.exports = {
     "gatsby-plugin-sharp",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
-//    {
-//      resolve: "gatsby-plugin-manifest",
-//      options: {
-//        icon: "src/images/icon.png",
-//      },
-//    },
-//    "gatsby-remark-images",
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        icon: "src/images/icon.png",
+      },
+    },
     {
       resolve: "gatsby-plugin-mdx",
       options: {
-//        defaultLayouts: {
-//          default: require.resolve("./src/templates/writings.js")
-//        },
-//        gatsbyRemarkPlugins: [
-//          "gatsby-remark-images",
-//        ],
+        extensions: ['.mdx','.md'],
+        defaultLayouts: {
+          default: require.resolve('./src/templates/default.js')
+        }
       }
     },
     {
@@ -40,7 +37,6 @@ module.exports = {
         name: "images",
         path: "./src/images/",
       },
-//      __key: "images",
     },
     {
       resolve: "gatsby-source-filesystem",
@@ -48,7 +44,6 @@ module.exports = {
         name: "pages",
         path: "./src/pages/",
       },
-//      __key: "pages",
     },
   ],
 };
