@@ -3,8 +3,7 @@ module.exports = {
     title: "Baroque Horse Training",
   },
   plugins: [
-    "gatsby-plugin-styled-components",
-    "gatsby-plugin-image",
+    "gatsby-transformer-sharp",
     {
       resolve: "gatsby-plugin-google-gtag",
       options: {
@@ -13,23 +12,35 @@ module.exports = {
         ]
       },
     },
-    "gatsby-plugin-react-helmet",
-    {
-      resolve: "gatsby-plugin-manifest",
-      options: {
-        icon: "src/images/icon.png",
-      },
-    },
-    "gatsby-transformer-remark",
+    "gatsby-plugin-styled-components",
     "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
+    "gatsby-plugin-image",
+    "gatsby-plugin-react-helmet",
+//    {
+//      resolve: "gatsby-plugin-manifest",
+//      options: {
+//        icon: "src/images/icon.png",
+//      },
+//    },
+//    "gatsby-remark-images",
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+//        defaultLayouts: {
+//          default: require.resolve("./src/templates/writings.js")
+//        },
+//        gatsbyRemarkPlugins: [
+//          "gatsby-remark-images",
+//        ],
+      }
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "images",
         path: "./src/images/",
       },
-      __key: "images",
+//      __key: "images",
     },
     {
       resolve: "gatsby-source-filesystem",
@@ -37,7 +48,7 @@ module.exports = {
         name: "pages",
         path: "./src/pages/",
       },
-      __key: "pages",
+//      __key: "pages",
     },
   ],
 };
