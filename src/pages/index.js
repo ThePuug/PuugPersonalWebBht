@@ -1,32 +1,61 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
+import { getImage, GatsbyImage } from "gatsby-plugin-image"
+import { Card, Grid } from "semantic-ui-react"
 
-const Page = ({ data: { allMdx: { nodes: links } } }) => {
+const Page = ({ data: { writings: { nodes: writings }, about } }) => {
   return <main>
-    <ul>
-      {links.map(link => (
-        <Link to={link.slug} key={link.slug}>
-          <li>
-            <span>
-              {link.frontmatter.title}
-              <p>{link.frontmatter.description}</p>
-            </span>
-          </li>
+    <Grid stackable columns={3}>
+      <Grid.Column></Grid.Column>
+      <Grid.Column>
+        <Link to={about.slug}>
+          <GatsbyImage image={getImage(about.frontmatter.image)} alt={about.frontmatter.title}/>
         </Link>
-      ))}
-    </ul>
+      </Grid.Column>
+      <Grid.Column></Grid.Column>
+    </Grid>
+    <Grid stackable columns={3}>
+      {writings.map((e) => <Grid.Column key={"writings-" + e.slug}>
+        <Card
+          href={e.slug}
+          fluid
+          image={<GatsbyImage image={getImage(e.frontmatter.image)} alt={e.slug} ui="false" wrapped="false" />}
+          header={e.frontmatter.title}
+          description={e.frontmatter.description}
+          extra={e.frontmatter.date}
+          />
+          </Grid.Column>
+      )}
+    </Grid>
   </main>
 }
 
 export const pageQuery = graphql`query {
-  allMdx {
+  writings: allMdx(filter: {slug: {regex: "/^writings\//"}}) {
     nodes {
       slug
       frontmatter {
         description
         title
+        image {
+          childImageSharp {
+            gatsbyImageData(aspectRatio: 1.33)
+          }
+        }
+        date
       }
     }
+  },
+  about: mdx(slug: {eq: "about"}) {
+    frontmatter {
+      title
+      image {
+        childImageSharp {
+          gatsbyImageData
+        }
+      }
+    }
+    slug
   }
 }`
 
