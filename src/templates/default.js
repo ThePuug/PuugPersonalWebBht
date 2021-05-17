@@ -1,7 +1,8 @@
 import React from "react"
+import { Container } from "semantic-ui-react"
 
 const Template = (props) => {
-  return <>{props.children}</>
+  return <Container text>{props.children}</Container>
 }
 
 export default Template
